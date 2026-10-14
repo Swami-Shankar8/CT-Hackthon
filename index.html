@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CT Build Fest 2.0 | 30-Hour Coding Hackathon</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#00f0ff',
+              magenta: '#ff007f',
+              purple: '#8b5cf6',
+              dark: '#070b19',
+              darker: '#030712',
+              card: '#0c132c'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+          },
+          boxShadow: {
+            'neon-cyan': '0 0 20px -2px rgba(0, 240, 255, 0.45)',
+            'neon-pink': '0 0 20px -2px rgba(255, 0, 127, 0.45)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Neon Glow & Background Grid Effects */
+    body {
+      background-color: #040817;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.15) 0%, rgba(255, 0, 127, 0.12) 35%, transparent 70%);
+    }
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glass-card {
+      background: rgba(14, 21, 49, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #00f0ff 0%, #a855f7 50%, #ff007f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Hide scrollbars smoothly */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-brand-darker text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-brand-cyan selection:text-black">
+
+  <!-- Top Notification & Navigation -->
+  <nav class="sticky top-0 z-50 bg-brand-darker/90 backdrop-blur-md border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Brand / College Header -->
+        <a href="#hero" class="flex items-center space-x-3 group">
+          <div class="h-10 px-3 bg-blue-600 rounded-lg flex items-center justify-center font-black tracking-wider text-white border border-blue-400">
+            CT
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-widest text-slate-400 font-medium">CT Group of Institutions</div>
+            <div class="text-base sm:text-lg font-bold font-display text-white tracking-wide flex items-center gap-1.5">
+              Build Fest <span class="text-brand-cyan">2.0</span>
+              <span class="inline-block w-2 h-2 rounded-full bg-brand-magenta animate-pulse"></span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Menu Links -->
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="#themes" class="hover:text-brand-cyan transition-colors">Themes</a>
+          <a href="#prizes" class="hover:text-brand-cyan transition-colors">Prizes</a>
+          <a href="#sponsors" class="hover:text-brand-cyan transition-colors">Sponsors</a>
+          <a href="#search-section" class="hover:text-brand-cyan transition-colors flex items-center gap-1.5 text-brand-cyan">
+            <i data-lucide="search" class="w-4 h-4"></i> Team Search
+          </a>
+          <a href="#contact" class="hover:text-brand-cyan transition-colors">Contact</a>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center space-x-3">
+          <button onclick="openSearchModal()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-2">
+            <i data-lucide="id-card" class="w-4 h-4 text-brand-cyan"></i>
+            <span>Find Team ID</span>
+          </button>
+          <a href="#register" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-brand-cyan to-blue-600 text-slate-950 hover:brightness-110 shadow-neon-cyan transition transform active:scale-95">
+            Register Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative pt-12 pb-20 md:pt-20 md:pb-28 hero-glow grid-bg overflow-hidden border-b border-slate-800/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      
+      <!-- Top Accreditation Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-6">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-950/80 text-blue-300 border border-blue-800/70 flex items-center gap-1.5">
+          <i data-lucide="award" class="w-3.5 h-3.5"></i> NAAC ACCREDITED
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-950/80 text-purple-300 border border-purple-800/70 flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> INSTITUTION'S INNOVATION COUNCIL
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-800/70 flex items-center gap-1.5">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> ISTE APPROVED
+        </span>
+      </div>
+
+      <!-- Tagline Mini Pill -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-brand-cyan/40 text-xs sm:text-sm text-slate-300 mb-6 shadow-sm">
+        <span class="text-brand-cyan font-mono font-bold">CODE</span> •
+        <span class="text-purple-400 font-mono font-bold">COLLABORATE</span> •
+        <span class="text-brand-magenta font-mono font-bold">CREATE</span> •
+        <span class="text-amber-400 font-mono font-bold">MAKE AN IMPACT</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold font-display tracking-tight leading-none mb-4">
+        CT <span class="text-gradient">Build Fest 2.0</span>
+      </h1>
+      
+      <p class="text-lg sm:text-2xl font-semibold text-slate-300 max-w-3xl mx-auto mb-6">
+        A 30-Hour National Level Coding Hackathon
+      </p>
+
+      <!-- Powered By Banner -->
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl glass-card border border-orange-500/30 mb-8 shadow-lg">
+        <span class="text-xs uppercase tracking-wider text-slate-400 font-medium">Powered by</span>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-1 bg-gradient-to-r from-orange-500 to-amber-600 text-white font-extrabold text-sm rounded-lg tracking-wide shadow">
+            Quick Heal
+          </span>
+          <span class="text-xs text-orange-200 font-semibold tracking-wider uppercase">Academy</span>
+        </div>
+      </div>
+
+      <!-- Key Details Badges -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10 text-left">
+        <div class="p-3.5 rounded-xl glass-card border border-slate-800 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-brand-cyan flex items-center justify-center shrink-0">
+            <i data-lucide="calendar" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] uppercase tracking-wider text-slate-400">Date</div>
+            <div class="text-xs sm:text-sm font-bold text-slate-100">Oct 30–31, 2026</div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl glass-card border border-slate-800 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] uppercase tracking-wider text-slate-400">Team Size</div>
+            <div class="text-xs sm:text-sm font-bold text-slate-100">3 – 6 Members</div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl glass-card border border-slate-800 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
+            <i data-lucide="trophy" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] uppercase tracking-wider text-slate-400">Prize Pool</div>
+            <div class="text-xs sm:text-sm font-bold text-amber-300">₹1,00,000 + Gifts</div>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl glass-card border border-slate-800 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-pink-500/10 text-pink-400 flex items-center justify-center shrink-0">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] uppercase tracking-wider text-slate-400">Venue</div>
+            <div class="text-xs sm:text-sm font-bold text-slate-100 truncate">CT Group, Maqsudan</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-12">
+        <a href="#register" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-cyan via-teal-400 to-blue-600 text-slate-950 hover:brightness-110 shadow-neon-cyan flex items-center justify-center gap-2 group transition">
+          <i data-lucide="clipboard-check" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+          Register Team Now
+        </a>
+        <a href="#search-section" class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center gap-2 transition">
+          <i data-lucide="search" class="w-5 h-5 text-brand-cyan"></i>
+          Track My Team ID
+        </a>
+      </div>
+
+      <!-- Countdown Timer Component -->
+      <div class="max-w-xl mx-auto p-4 sm:p-6 rounded-2xl glass-card border border-slate-800">
+        <div class="text-xs uppercase font-mono tracking-widest text-slate-400 mb-3 flex items-center justify-center gap-2">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan"></i> HACKATHON BEGINS IN
+        </div>
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 text-center" id="countdown-timer">
+          <div class="p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span id="days" class="text-2xl sm:text-4xl font-extrabold font-display text-brand-cyan">21</span>
+            <div class="text-[10px] sm:text-xs text-slate-400 uppercase mt-1">Days</div>
+          </div>
+          <div class="p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span id="hours" class="text-2xl sm:text-4xl font-extrabold font-display text-white">08</span>
+            <div class="text-[10px] sm:text-xs text-slate-400 uppercase mt-1">Hours</div>
+          </div>
+          <div class="p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span id="minutes" class="text-2xl sm:text-4xl font-extrabold font-display text-white">45</span>
+            <div class="text-[10px] sm:text-xs text-slate-400 uppercase mt-1">Mins</div>
+          </div>
+          <div class="p-2 sm:p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+            <span id="seconds" class="text-2xl sm:text-4xl font-extrabold font-display text-brand-magenta">19</span>
+            <div class="text-[10px] sm:text-xs text-slate-400 uppercase mt-1">Secs</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Featured Partners Banner -->
+  <section class="py-8 bg-slate-950 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-4">Official Technology & Academic Ecosystem</p>
+      <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-90">
+        <div class="text-center">
+          <span class="text-xs text-slate-400 block mb-0.5">Industry Tech Partner</span>
+          <span class="text-2xl font-black tracking-widest font-mono text-blue-400">IBM</span>
+        </div>
+        <div class="h-8 w-[1px] bg-slate-800 hidden sm:block"></div>
+        <div class="text-center">
+          <span class="text-xs text-slate-400 block mb-0.5">Powered By</span>
+          <span class="text-lg font-bold text-amber-500">Quick Heal Academy</span>
+        </div>
+        <div class="h-8 w-[1px] bg-slate-800 hidden sm:block"></div>
+        <div class="text-center">
+          <span class="text-xs text-slate-400 block mb-0.5">Track Partners</span>
+          <span class="text-sm font-bold text-purple-400">BRIGHTXR <span class="text-slate-600">|</span> THREAD SECURITY</span>
+        </div>
+        <div class="h-8 w-[1px] bg-slate-800 hidden sm:block"></div>
+        <div class="text-center">
+          <span class="text-xs text-slate-400 block mb-0.5">Sponsors</span>
+          <span class="text-sm font-bold text-emerald-400">SECUNEUS <span class="text-slate-600">|</span> GTB COMPUTER EDUCATION</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Themes Section -->
+  <section id="themes" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 uppercase tracking-widest">
+          Innovation Tracks
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white mt-3 mb-4">
+          Theme Categories
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Choose a problem statement within these 5 high-impact tracks and build game-changing prototypes over 30 hours.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Theme 1 -->
+        <div class="group p-6 rounded-2xl glass-card border border-cyan-500/20 hover:border-brand-cyan transition duration-300 relative overflow-hidden">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-brand-cyan flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-cyan transition-colors">
+            AI & Intelligent Systems
+          </h3>
+          <p class="text-xs font-semibold text-cyan-300 italic mb-3">
+            "Smarter Solutions for a Better Tomorrow"
+          </p>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Machine Learning, Generative AI, predictive modeling, autonomous agents, and computer vision solving critical industrial and domestic challenges.
+          </p>
+        </div>
+
+        <!-- Theme 2 -->
+        <div class="group p-6 rounded-2xl glass-card border border-pink-500/20 hover:border-pink-500 transition duration-300 relative overflow-hidden">
+          <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-brand-magenta flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="shield-alert" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-magenta transition-colors">
+            Cyber Security
+          </h3>
+          <p class="text-xs font-semibold text-pink-300 italic mb-3">
+            "A Safer Digital World"
+          </p>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Securing endpoints, threat detection, cryptography, network intelligence, fraud detection algorithms, and cloud defense architecture.
+          </p>
+        </div>
+
+        <!-- Theme 3 -->
+        <div class="group p-6 rounded-2xl glass-card border border-emerald-500/20 hover:border-emerald-400 transition duration-300 relative overflow-hidden">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="book-open" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+            Smart Education & Social Innovation
+          </h3>
+          <p class="text-xs font-semibold text-emerald-300 italic mb-3">
+            "Empowering People, Enabling Change"
+          </p>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            EdTech platforms, inclusive accessibility solutions, vernacular learning utilities, community welfare tools, and digital civic governance.
+          </p>
+        </div>
+
+        <!-- Theme 4 -->
+        <div class="group p-6 rounded-2xl glass-card border border-amber-500/20 hover:border-amber-400 transition duration-300 relative overflow-hidden">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="cpu" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+            IoT, Robotics & Automation
+          </h3>
+          <p class="text-xs font-semibold text-amber-300 italic mb-3">
+            "Connecting Ideas to Real-World Solutions"
+          </p>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Embedded hardware systems, sensor telemetry, smart factory setups, automated drones, and real-time remote surveillance devices.
+          </p>
+        </div>
+
+        <!-- Theme 5 -->
+        <div class="group p-6 rounded-2xl glass-card border border-teal-500/20 hover:border-teal-400 transition duration-300 relative overflow-hidden md:col-span-2 lg:col-span-2">
+          <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="sprout" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
+            Sustainability, Environment & Student Innovation
+          </h3>
+          <p class="text-xs font-semibold text-teal-300 italic mb-3">
+            "Innovate for a Bright Future"
+          </p>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Clean energy monitoring, carbon footprint calculators, smart agriculture, waste reduction tracking, and open breakthrough student-led ideas.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Prize Pool & Goodies Section -->
+  <section id="prizes" class="py-20 bg-slate-950/70 border-y border-slate-800/80 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 uppercase tracking-widest">
+          Rewards & Recognition
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold font-display text-white mt-3 mb-2">
+          Prize Pool Of Worth
+        </h2>
+        <div class="text-4xl sm:text-6xl font-black text-gradient-gold tracking-tight font-display mb-4">
+          ₹1,00,000
+        </div>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Plus guaranteed certificates, direct mentorship from industry leaders, and exciting hardware rewards!
+        </p>
+      </div>
+
+      <!-- Goodies Cards directly matching poster -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        
+        <div class="p-5 rounded-2xl glass-card border border-blue-500/30 text-center flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-3">
+            <i data-lucide="tablet" class="w-8 h-8"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">TABLETS</h4>
+          <span class="text-xs text-slate-400 mt-1">High-performance tabs</span>
+        </div>
+
+        <div class="p-5 rounded-2xl glass-card border border-purple-500/30 text-center flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-3">
+            <i data-lucide="speaker" class="w-8 h-8"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">SOUND BARS</h4>
+          <span class="text-xs text-slate-400 mt-1">Premium audio gear</span>
+        </div>
+
+        <div class="p-5 rounded-2xl glass-card border border-pink-500/30 text-center flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-pink-500/10 text-brand-magenta flex items-center justify-center mb-3">
+            <i data-lucide="headphones" class="w-8 h-8"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">EAR PODS</h4>
+          <span class="text-xs text-slate-400 mt-1">Wireless ANC earbuds</span>
+        </div>
+
+        <div class="p-5 rounded-2xl glass-card border border-emerald-500/30 text-center flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+            <i data-lucide="watch" class="w-8 h-8"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">SMART WATCHES</h4>
+          <span class="text-xs text-slate-400 mt-1">Fitness & health tracker</span>
+        </div>
+
+      </div>
+
+      <!-- Perks Row -->
+      <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/30 to-pink-950/40 border border-slate-800 flex flex-wrap items-center justify-around gap-4 text-xs sm:text-sm text-slate-300">
+        <div class="flex items-center gap-2"><i data-lucide="coffee" class="text-amber-400 w-4 h-4"></i> Free Meals & Midnight Snacks</div>
+        <div class="flex items-center gap-2"><i data-lucide="shirt" class="text-cyan-400 w-4 h-4"></i> Official Hackathon T-Shirts</div>
+        <div class="flex items-center gap-2"><i data-lucide="file-check" class="text-emerald-400 w-4 h-4"></i> Certificate of Participation</div>
+        <div class="flex items-center gap-2"><i data-lucide="briefcase" class="text-purple-400 w-4 h-4"></i> Internship & Hiring Opportunities</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Search / Track Team Section -->
+  <section id="search-section" class="py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 sm:p-10 rounded-3xl glass-card border border-brand-cyan/40 shadow-neon-cyan/20">
+        
+        <div class="text-center mb-8">
+          <div class="w-12 h-12 mx-auto rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center mb-3">
+            <i data-lucide="search-check" class="w-6 h-6"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-display text-white">
+            Track Team & View Registration
+          </h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">
+            Apna Unique Team ID (jaise <code class="text-brand-cyan">CTBF-1024</code>) ya Team Leader ka registered email enter karein.
+          </p>
+        </div>
+
+        <!-- Search Input Form -->
+        <div class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-6">
+          <div class="relative flex-1">
+            <i data-lucide="hash" class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="text" 
+              id="searchQuery" 
+              placeholder="Enter Team ID (e.g. CTBF-2026) or Leader Email..." 
+              class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-cyan text-sm"
+              onkeypress="if(event.key === 'Enter') handleSearchTeam()"
+            />
+          </div>
+          <button 
+            onclick="handleSearchTeam()" 
+            class="px-7 py-3.5 rounded-xl font-bold bg-brand-cyan text-slate-950 hover:bg-cyan-300 transition flex items-center justify-center gap-2 text-sm shadow-md"
+          >
+            <i data-lucide="search" class="w-4 h-4"></i> Search
+          </button>
+        </div>
+
+        <div class="text-center text-xs text-slate-400 mb-6">
+          Testing ke liye try karein: 
+          <button onclick="fillDemoSearch('CTBF-2026')" class="underline text-brand-cyan hover:text-white mx-1 font-mono">CTBF-2026</button> ya 
+          <button onclick="fillDemoSearch('CTBF-4412')" class="underline text-brand-cyan hover:text-white mx-1 font-mono">CTBF-4412</button>
+        </div>
+
+        <!-- Search Result Card (Dynamic Output) -->
+        <div id="searchResultContainer" class="hidden"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Section -->
+  <section id="register" class="py-20 bg-slate-950/60 border-t border-slate-800 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-magenta/10 text-brand-magenta border border-brand-magenta/30 uppercase tracking-widest">
+          Join CT Build Fest 2.0
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white mt-3 mb-3">
+          Team Registration
+        </h2>
+        <p class="text-slate-400 text-sm">
+          You can register via the Google Form and by registering your team on the website portal... <strong>Instant Team ID</strong> generate.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        
+        <!-- Option 1: Official Google Form Integration -->
+        <div class="p-8 rounded-3xl glass-card border border-slate-700 hover:border-purple-500/50 transition">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
+              <i data-lucide="form-input" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Google Form Submission</h3>
+              <p class="text-xs text-slate-400">Official Form Link for Registration</p>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+            If your college has issued a Google Form, you can fill it out directly. You can also customize the link provided below.        </p>
+
+          <!-- Configurable Google Form Link Box -->
+          <div class="mb-5 p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Configured Google Form URL:</label>
+            <div class="flex items-center gap-2">
+              <input 
+                type="text" 
+                id="googleFormUrlInput" 
+                value="https://forms.gle/79HKMZmQp1Vqvp3C9" 
+                class="w-full bg-transparent text-xs text-brand-cyan focus:outline-none font-mono"
+              />
+
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <a 
+              id="googleFormBtn" 
+              href="https://forms.gle/79HKMZmQp1Vqvp3C9" 
+              target="_blank" 
+              class="w-full py-3.5 px-6 rounded-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white flex items-center justify-center gap-2 transition shadow-lg"
+            >
+              <i data-lucide="external-link" class="w-4 h-4"></i> Open Official Google Form
+            </a>
+            <button 
+              onclick="copyGoogleFormLink()" 
+              class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 flex items-center justify-center gap-2 transition"
+            >
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Google Form Link
+            </button>
+          </div>
+
+          <!-- Embedded Form Accordion / Option -->
+          <div class="mt-6 pt-5 border-t border-slate-800 text-center">
+            <button onclick="toggleEmbedGoogleForm()" class="text-xs text-slate-400 hover:text-brand-cyan flex items-center justify-center gap-1 mx-auto">
+              <span>View embedded preview</span>
+              <i data-lucide="chevron-down" id="embedChevron" class="w-3.5 h-3.5 transition-transform"></i>
+            </button>
+            <div id="embedFormContainer" class="hidden mt-4 rounded-xl overflow-hidden border border-slate-800 bg-slate-900 p-4 text-center">
+              <p class="text-xs text-slate-400 mb-3">Google Form Embedded View</p>
+              <div class="h-64 flex flex-col items-center justify-center bg-slate-950 rounded-lg border border-dashed border-slate-800 p-4">
+                <i data-lucide="file-spreadsheet" class="w-10 h-10 text-purple-400 mb-2"></i>
+                <p class="text-xs text-slate-300">Live Google Form frame will appear here once linked.</p>
+                <a id="embeddedRedirect" href="https://forms.gle/79HKMZmQp1Vqvp3C9" target="_blank" class="mt-3 text-xs text-brand-cyan underline">Open external tab</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Option 2: Instant Team Registration & ID Generator -->
+        <div class="p-8 rounded-3xl glass-card border border-brand-cyan/30 shadow-lg relative">
+          <div class="absolute -top-3 right-6 px-3 py-0.5 rounded-full text-[11px] font-bold bg-brand-cyan text-slate-950 uppercase tracking-wider">
+            Instant Team ID
+          </div>
+
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center">
+              <i data-lucide="user-plus" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Generate Team ID</h3>
+              <p class="text-xs text-slate-400">Portal Entry & Verification</p>
+            </div>
+          </div>
+
+          <form id="teamRegisterForm" onsubmit="handleRegisterSubmit(event)" class="space-y-4">
+            
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Team Name *</label>
+              <input required id="regTeamName" type="text" placeholder="e.g. CyberKnights" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan"/>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Leader Name *</label>
+                <input required id="regLeaderName" type="text" placeholder="Leader Full Name" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan"/>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Leader Email *</label>
+                <input required id="regLeaderEmail" type="email" placeholder="leader@college.edu" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Leader Phone *</label>
+                <input required id="regLeaderPhone" type="tel" placeholder="+91 98765 43210" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan"/>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-300 mb-1">Team Size * (3-6)</label>
+                <select id="regTeamSize" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan">
+                  <option value="3">3 Members</option>
+                  <option value="4" selected>4 Members</option>
+                  <option value="5">5 Members</option>
+                  <option value="6">6 Members</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Innovation Theme *</label>
+              <select id="regTheme" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan">
+                <option value="AI & Intelligent Systems">AI & Intelligent Systems</option>
+                <option value="Cyber Security">Cyber Security</option>
+                <option value="Smart Education & Social Innovation">Smart Education & Social Innovation</option>
+                <option value="IoT, Robotics & Automation">IoT, Robotics & Automation</option>
+                <option value="Sustainability, Environment & Student Innovation">Sustainability, Environment & Student Innovation</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">College / Institute Name *</label>
+              <input required id="regCollege" type="text" placeholder="e.g. CT Group of Institutions / GNDU / NIT" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan"/>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-cyan to-teal-400 text-slate-950 hover:brightness-110 shadow-neon-cyan transition flex items-center justify-center gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4"></i> Submit & Generate Team ID
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Official Sponsors & Partners Section (Exact match to poster) -->
+  <section id="sponsors" class="py-20 relative bg-brand-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/30 uppercase tracking-widest">
+          Backed By Giants
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold font-display text-white mt-3 mb-2">
+          Partners & Sponsors
+        </h2>
+        <p class="text-slate-400 text-sm">
+          Collaborating with industry leaders in security, enterprise cloud, and student transformation.
+        </p>
+      </div>
+
+      <!-- Power Sponsor Highlight -->
+      <div class="max-w-3xl mx-auto mb-12">
+        <div class="p-6 rounded-3xl glass-card border border-orange-500/40 text-center relative overflow-hidden">
+          <div class="text-xs uppercase font-mono tracking-widest text-orange-400 font-semibold mb-3">Powered By</div>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <span class="text-3xl sm:text-4xl font-black bg-gradient-to-r from-orange-500 via-amber-400 to-orange-600 bg-clip-text text-transparent">
+              Quick Heal
+            </span>
+            <span class="text-xl sm:text-2xl font-bold text-white tracking-widest uppercase">Academy</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Global Leader in Cybersecurity Protection & Digital Safety</p>
+        </div>
+      </div>
+
+      <!-- Industry Session Partner -->
+      <div class="max-w-3xl mx-auto mb-12">
+        <div class="p-6 rounded-3xl glass-card border border-blue-500/40 text-center">
+          <div class="text-xs uppercase font-mono tracking-widest text-blue-400 font-semibold mb-2">Industry Technology Session Partner</div>
+          <div class="text-4xl sm:text-5xl font-mono font-black text-white tracking-widest">
+            IBM
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Delivering hands-on cloud & AI enterprise training sessions</p>
+        </div>
+      </div>
+
+      <!-- Track Partners & Sponsors Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        
+        <!-- Track Partners -->
+        <div class="p-6 rounded-2xl glass-card border border-slate-800">
+          <div class="text-xs uppercase font-mono tracking-widest text-purple-400 font-semibold mb-4 text-center">Track Partners</div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-center flex flex-col items-center justify-center">
+              <div class="w-10 h-10 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-2 font-bold font-mono">XR</div>
+              <h5 class="text-sm font-bold text-white">BRIGHTXR</h5>
+              <span class="text-[10px] text-slate-400">Extended Reality Tracks</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-center flex flex-col items-center justify-center">
+              <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-2">
+                <i data-lucide="shield" class="w-5 h-5"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">THREAD SECURITY</h5>
+              <span class="text-[10px] text-slate-400">Cyber Defense Evaluation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Our Sponsors -->
+        <div class="p-6 rounded-2xl glass-card border border-slate-800">
+          <div class="text-xs uppercase font-mono tracking-widest text-brand-cyan font-semibold mb-4 text-center">Our Sponsors</div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-center flex flex-col items-center justify-center">
+              <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mb-2">
+                <i data-lucide="lock" class="w-5 h-5"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">SECUNEUS</h5>
+              <span class="text-[10px] text-slate-400">Cyber Security Solutions</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-center flex flex-col items-center justify-center">
+              <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center mb-2 font-bold font-mono">GTB</div>
+              <h5 class="text-sm font-bold text-white">GTB INFOTECH</h5>
+              <span class="text-[10px] text-slate-400">Computer Education & Tech</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Hackathon Schedule & Guidelines -->
+  <section class="py-20 border-t border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl font-extrabold font-display text-white mb-3">
+          30-Hour Hackathon Roadmap
+        </h2>
+        <p class="text-slate-400 text-xs sm:text-sm">
+          October 30 – October 31, 2026 • CT Group of Institutions, Maqsudan
+        </p>
+      </div>
+
+      <div class="relative border-l-2 border-slate-800 ml-4 md:ml-28 space-y-8 pl-6 md:pl-10">
+        
+        <!-- Day 1 - 09:00 AM -->
+        <div class="relative">
+          <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-brand-cyan ring-4 ring-slate-900"></div>
+          <span class="text-xs font-mono text-brand-cyan uppercase font-semibold">Day 1 • 09:00 AM – 10:30 AM</span>
+          <h4 class="text-base font-bold text-white mt-1">Reporting, Verification & Kit Distribution</h4>
+          <p class="text-xs text-slate-400 mt-1">Teams arrive at CT Maqsudan campus, collect Hackathon ID badges, kits, and seat allocation.</p>
+        </div>
+
+        <!-- Day 1 - 11:00 AM -->
+        <div class="relative">
+          <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-blue-500 ring-4 ring-slate-900"></div>
+          <span class="text-xs font-mono text-blue-400 uppercase font-semibold">Day 1 • 11:00 AM</span>
+          <h4 class="text-base font-bold text-white mt-1">Hackathon Kick-off & Timer Starts (30 Hours)</h4>
+          <p class="text-xs text-slate-400 mt-1">Hacking officially begins. Keynote address and problem statements briefing.</p>
+        </div>
+
+        <!-- Day 1 - 04:00 PM -->
+        <div class="relative">
+          <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-purple-500 ring-4 ring-slate-900"></div>
+          <span class="text-xs font-mono text-purple-400 uppercase font-semibold">Day 1 • 04:00 PM</span>
+          <h4 class="text-base font-bold text-white mt-1">IBM Tech Session & Mentorship Round 1</h4>
+          <p class="text-xs text-slate-400 mt-1">Special industry masterclass by IBM technology engineers followed by mentor check-ins.</p>
+        </div>
+
+        <!-- Day 1 - Midnight -->
+        <div class="relative">
+          <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-pink-500 ring-4 ring-slate-900"></div>
+          <span class="text-xs font-mono text-pink-400 uppercase font-semibold">Day 1 • Midnight 12:00 AM</span>
+          <h4 class="text-base font-bold text-white mt-1">Midnight Fuel & Jamming Session</h4>
+          <p class="text-xs text-slate-400 mt-1">Energy drinks, snacks, music games, and Round 2 code reviews.</p>
+        </div>
+
+        <!-- Day 2 - 05:00 PM -->
+        <div class="relative">
+          <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-amber-400 ring-4 ring-slate-900"></div>
+          <span class="text-xs font-mono text-amber-400 uppercase font-semibold">Day 2 • 05:00 PM</span>
+          <h4 class="text-base font-bold text-white mt-1">Grand Finale, Jury Evaluation & Prize Ceremony</h4>
+          <p class="text-xs text-slate-400 mt-1">Top teams pitch to the jury. Distribution of ₹1,00,000 cash prizes and gadgets.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Location Footer -->
+  <footer id="contact" class="bg-black border-t border-slate-800 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 pb-12 border-b border-slate-800">
+        
+        <!-- College Identity -->
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="h-10 px-3 bg-blue-600 rounded-lg flex items-center justify-center font-black tracking-wider text-white">
+              CT
+            </div>
+            <div>
+              <div class="text-xs uppercase tracking-widest text-slate-400">NAAC Accredited</div>
+              <div class="text-lg font-bold font-display text-white">CT Group of Institutions</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Maqsudan, Jalandhar (Punjab), India.<br>
+            Empowering youth through state-of-the-art technical excellence and entrepreneurship.
+          
+
+        <!-- Event Coordinator & Helplines -->
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Contact Information</h4>
+          <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
+            <li class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-brand-cyan shrink-0">
+                <i data-lucide="phone-call" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="text-[11px] text-slate-400">Coordinator Contact</div>
+                <a href="tel:+917710110129" class="font-bold text-white hover:text-brand-cyan transition">
+                  +91 77101-10129
+                </a>
+                <span class="text-slate-400 text-xs ml-1">(Dr. Anu Arora)</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-purple-400 shrink-0">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="text-[11px] text-slate-400">Support Email</div>
+                <a href="mailto:buildfest@ctgroup.in" class="text-white hover:text-brand-cyan">buildfest@ctgroup.in</a>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-pink-400 shrink-0">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="text-[11px] text-slate-400">Campus Venue</div>
+                <span class="text-white">Maqsudan, Jalandhar, Punjab</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Quick Access Navigation -->
+        <div>
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Quick Links</h4>
+          <div class="grid grid-cols-2 gap-2 text-xs text-slate-400">
+            <a href="#hero" class="hover:text-brand-cyan py-1">Home</a>
+            <a href="#themes" class="hover:text-brand-cyan py-1">Theme Categories</a>
+            <a href="#prizes" class="hover:text-brand-cyan py-1">Prizes & Gifts</a>
+            <a href="#register" class="hover:text-brand-cyan py-1">Google Form</a>
+            <a href="#search-section" class="hover:text-brand-cyan py-1">Verify Team ID</a>
+            <a href="#sponsors" class="hover:text-brand-cyan py-1">Our Sponsors</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+        <div>
+          © 2026 CT Group of Institutions. CT Build Fest 2.0 • All Rights Reserved.
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-slate-400">EAT • CODE • SLEEP • REPEAT</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Search Modal Dialog for Header Shortcut -->
+  <div id="quickSearchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+      <button onclick="closeSearchModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+        <i data-lucide="search" class="w-5 h-5 text-brand-cyan"></i> Find Team Registration
+      </h3>
+      <p class="text-xs text-slate-400 mb-4">Apna Team ID daalein aur details dekhein.</p>
+      <input 
+        type="text" 
+        id="modalSearchInput" 
+        placeholder="e.g. CTBF-2026" 
+        class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-sm text-white focus:outline-none focus:border-brand-cyan mb-4"
+        onkeypress="if(event.key === 'Enter') executeModalSearch()"
+      />
+      <div class="flex gap-2">
+        <button onclick="executeModalSearch()" class="flex-1 py-2.5 rounded-xl bg-brand-cyan text-slate-950 font-bold text-xs hover:brightness-110">
+          Search Team
+        </button>
+        <button onclick="closeSearchModal()" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-semibold text-xs">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast Box (No alerts used) -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300">
+    <div class="bg-slate-900 text-white border border-brand-cyan px-4 py-3 rounded-xl shadow-neon-cyan flex items-center gap-3 text-xs sm:text-sm">
+      <i data-lucide="info" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+      <span id="toastMessage">Success message here!</span>
+    </div>
+  </div>
+
+  <script>
+    // Initial in-memory Mock Database for Hackathon teams
+    const initialDatabase = [
+      {
+        id: "CTBF-2026",
+        teamName: "CodeCrafters",
+        leaderName: "Rahul Sharma",
+        leaderEmail: "rahul.sharma@example.com",
+        leaderPhone: "+91 98765 43210",
+        theme: "AI & Intelligent Systems",
+        college: "CT Group of Institutions, Maqsudan",
+        teamSize: 4,
+        members: ["Rahul Sharma (Leader)", "Aman Deep Singh", "Priya Verma", "Simran Kaur"],
+        status: "Verified & Confirmed",
+        registrationDate: "2026-10-09"
+      },
+      {
+        id: "CTBF-4412",
+        teamName: "CyberShield Vanguard",
+        leaderName: "Gaurav Sehgal",
+        leaderEmail: "gaurav.s@example.com",
+        leaderPhone: "+91 98111 22334",
+        theme: "Cyber Security",
+        college: "NIT Jalandhar",
+        teamSize: 5,
+        members: ["Gaurav Sehgal (Leader)", "Rohit Verma", "Neha Patel", "Jaspreet Singh", "Kavita Rao"],
+        status: "Verified & Confirmed",
+        registrationDate: "2026-10-08"
+      }
+    ];
+
+    // Load teams from localStorage or set default
+    function getStoredTeams() {
+      try {
+        const stored = localStorage.getItem('ct_buildfest_teams');
+        if (stored) return JSON.parse(stored);
+      } catch (e) {
+        console.warn('Storage access limited');
+      }
+      return initialDatabase;
+    }
+
+    function saveTeams(teams) {
+      try {
+        localStorage.setItem('ct_buildfest_teams', JSON.stringify(teams));
+      } catch (e) {
+        console.warn('Could not save to localStorage', e);
+      }
+    }
+
+    // Initialize state
+    let teamsDatabase = getStoredTeams();
+
+    // Toast helper replacing alert()
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      if (!toast || !toastMsg) return;
+      toastMsg.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+    }
+
+    function handleSearchTeam() {
+      const input = document.getElementById('searchQuery');
+      const query = input.value.trim().toLowerCase();
+      const container = document.getElementById('searchResultContainer');
+
+      if (!query) {
+        showToast("Kripya Team ID ya Email enter karein!");
+        return;
+      }
+
+      // Match either ID or leader email
+      const team = teamsDatabase.find(t => 
+        t.id.toLowerCase() === query || 
+        t.leaderEmail.toLowerCase() === query ||
+        t.teamName.toLowerCase().includes(query)
+      );
+
+      container.classList.remove('hidden');
+
+      if (!team) {
+        container.innerHTML = `
+          <div class="p-6 rounded-2xl bg-rose-950/40 border border-rose-800 text-center">
+            <i data-lucide="alert-circle" class="w-10 h-10 text-rose-400 mx-auto mb-2"></i>
+            <h4 class="text-base font-bold text-white">Koi Team Nahi Mili!</h4>
+            <p class="text-xs text-slate-400 mt-1">"${escapeHtml(query)}" ke liye koi registration record nahi mila. Kripya apna ID check karein ya form dubara bharein.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      // Generate dynamic badges and members list
+      const membersListHtml = (team.members && team.members.length > 0)
+        ? team.members.map((m, idx) => `<li class="flex items-center gap-2 text-xs text-slate-300 py-1 border-b border-slate-800/60 last:border-none"><span class="w-5 h-5 rounded-full bg-slate-800 text-brand-cyan flex items-center justify-center text-[10px] font-bold">${idx+1}</span> ${escapeHtml(m)}</li>`).join('')
+        : `<li class="text-xs text-slate-400">${escapeHtml(team.leaderName)} (Leader) + ${team.teamSize - 1} members</li>`;
+
+      container.innerHTML = `
+        <div class="mt-4 p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-brand-cyan shadow-xl text-left animate-fadeIn">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+            <div>
+              <span class="text-[10px] uppercase font-mono tracking-widest text-slate-400">Confirmed Team Profile</span>
+              <h3 class="text-2xl font-black text-white font-display flex items-center gap-2">
+                ${escapeHtml(team.teamName)}
+                <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700">
+                  ${escapeHtml(team.status)}
+                </span>
+              </h3>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] uppercase font-mono text-slate-400 block">Assigned Team ID</span>
+              <span class="text-lg font-mono font-black text-brand-cyan bg-slate-950 px-3 py-1 rounded-lg border border-slate-800 inline-block">
+                ${escapeHtml(team.id)}
+              </span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-b border-slate-800 text-xs">
+            <div>
+              <span class="text-slate-400 block mb-0.5">Track / Category:</span>
+              <span class="font-semibold text-white flex items-center gap-1.5 text-cyan-300">
+                <i data-lucide="tag" class="w-3.5 h-3.5"></i> ${escapeHtml(team.theme)}
+              </span>
+            </div>
+            <div>
+              <span class="text-slate-400 block mb-0.5">Institution:</span>
+              <span class="font-semibold text-white flex items-center gap-1.5">
+                <i data-lucide="building" class="w-3.5 h-3.5 text-slate-400"></i> ${escapeHtml(team.college)}
+              </span>
+            </div>
+            <div>
+              <span class="text-slate-400 block mb-0.5">Team Leader:</span>
+              <span class="font-semibold text-white">${escapeHtml(team.leaderName)} (${escapeHtml(team.leaderEmail)})</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block mb-0.5">Total Squad:</span>
+              <span class="font-semibold text-white">${team.teamSize} Members Registered</span>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <h5 class="text-xs uppercase font-semibold text-slate-400 mb-2">Squad Members Roster:</h5>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 mb-4">
+              ${membersListHtml}
+            </ul>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <span class="text-[11px] text-slate-500 font-mono">Reporting: Oct 30, 2026 @ CT Maqsudan</span>
+            <button onclick="copyToClipboard('${team.id}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Team ID
+            </button>
+          </div>
+
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function fillDemoSearch(id) {
+      const input = document.getElementById('searchQuery');
+      input.value = id;
+      handleSearchTeam();
+    }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      
+      const teamName = document.getElementById('regTeamName').value.trim();
+      const leaderName = document.getElementById('regLeaderName').value.trim();
+      const leaderEmail = document.getElementById('regLeaderEmail').value.trim();
+      const leaderPhone = document.getElementById('regLeaderPhone').value.trim();
+      const teamSize = parseInt(document.getElementById('regTeamSize').value) || 4;
+      const theme = document.getElementById('regTheme').value;
+      const college = document.getElementById('regCollege').value.trim();
+
+      // Generate clean unique ID format: CTBF-XXXX
+      const randomCode = Math.floor(1000 + Math.random() * 9000);
+      const generatedId = `CTBF-${randomCode}`;
+
+      // Build member list mockup
+      const memberNames = [`${leaderName} (Leader)`];
+      for (let i = 2; i <= teamSize; i++) {
+        memberNames.push(`Team Member ${i}`);
+      }
+
+      const newTeam = {
+        id: generatedId,
+        teamName: teamName,
+        leaderName: leaderName,
+        leaderEmail: leaderEmail,
+        leaderPhone: leaderPhone,
+        theme: theme,
+        college: college,
+        teamSize: teamSize,
+        members: memberNames,
+        status: "Registration Received",
+        registrationDate: new Date().toISOString().split('T')[0]
+      };
+
+      teamsDatabase.unshift(newTeam);
+      saveTeams(teamsDatabase);
+
+      // Reset Form
+      document.getElementById('teamRegisterForm').reset();
+
+      // Show confirmation & directly scroll to search output
+      showToast(`Badhai ho! Aapka Team ID generate ho gaya: ${generatedId}`);
+      
+      const searchInput = document.getElementById('searchQuery');
+      if (searchInput) {
+        searchInput.value = generatedId;
+        handleSearchTeam();
+        document.getElementById('search-section').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Google Form Link helpers
+    function copyGoogleFormLink() {
+      const link = document.getElementById('googleFormUrlInput').value;
+      copyToClipboard(link);
+      showToast("Google Form Link clipboard par copy ho gaya!");
+    }
+
+    function editFormUrlPrompt() {
+      const current = document.getElementById('googleFormUrlInput').value;
+      const updated = prompt("Apna naya Google Form URL paste karein:", current);
+      if (updated && updated.trim()) {
+        const cleanUrl = updated.trim();
+        document.getElementById('googleFormUrlInput').value = cleanUrl;
+        document.getElementById('googleFormBtn').href = cleanUrl;
+        document.getElementById('embeddedRedirect').href = cleanUrl;
+        showToast("Google Form URL update ho gaya!");
+      }
+    }
+
+    function toggleEmbedGoogleForm() {
+      const container = document.getElementById('embedFormContainer');
+      const chevron = document.getElementById('embedChevron');
+      if (container.classList.contains('hidden')) {
+        container.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        container.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+
+    // Safe clipboard copy using execCommand fallback
+    function copyToClipboard(text) {
+      try {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        showToast(`Copied: "${text}"`);
+      } catch (err) {
+        showToast("Could not copy directly.");
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Quick Search Modal handlers
+    function openSearchModal() {
+      const modal = document.getElementById('quickSearchModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.getElementById('modalSearchInput').focus();
+    }
+
+    function closeSearchModal() {
+      const modal = document.getElementById('quickSearchModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function executeModalSearch() {
+      const val = document.getElementById('modalSearchInput').value.trim();
+      if (!val) return;
+      closeSearchModal();
+      document.getElementById('searchQuery').value = val;
+      handleSearchTeam();
+      document.getElementById('search-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function initCountdown() {
+      // Event Target: October 30, 2026 09:00 AM IST
+      const targetDate = new Date('2026-10-30T09:00:00+05:30').getTime();
+
+      function update() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+          document.getElementById('days').innerText = '00';
+          document.getElementById('hours').innerText = '00';
+          document.getElementById('minutes').innerText = '00';
+          document.getElementById('seconds').innerText = '00';
+          return;
+        }
+
+        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+        document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+        document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initCountdown();
+    });
+  </script>
+</body>
+</html>
